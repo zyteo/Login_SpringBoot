@@ -1,23 +1,66 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import axios from "axios";
+import React, {  useState } from "react";
+import SignUp from "./pages/Signup";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Login from "./pages/Login";
+import Welcome from "./pages/Welcome";
+import NavBar from "./pages/NavBar";
 
 function App() {
+  const [auth, setAuth] = useState("NoAuth");
+  const [role, setRole] = useState("User");
+  const [userName, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [language, setLanguage] = useState("English");
+
+  const navigate = useNavigate();
+  // handle function for logging out, passed as props to navbar
+  const handleLogOut = async () => {
+    await axios.get(`/api/logout`);
+    setAuth("NoAuth");
+    setRole("User");
+    setUsername("");
+    localStorage.removeItem("token");
+    navigate(`/`);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar
+        auth={auth}
+        handleLogOut={handleLogOut}
+        userName={userName}
+        setLanguage={setLanguage}
+        language={language}
+      />
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <Login
+              setName={setName}
+              setAuth={setAuth}
+              setRole={setRole}
+              setUsername={setUsername}
+              language={language}
+            />
+          }
+        />
+
+        <Route path="/signup" element={<SignUp language={language} />} />
+        <Route
+          path="/welcome"
+          element={
+            <Welcome
+              language={language}
+              auth={auth}
+            />
+          }
+        />
+
+      </Routes>
     </div>
   );
 }
