@@ -80,6 +80,9 @@ JWT adds a lot more complexity to Springboot code.
 Decided to try another way, use Java springboot backend with mongoDB + CRUD.
 Then I utilise reactJS frontend for hashing PW + JWT. Quite confident I can do it.
 
+- 19 Dec: Got the springboot backend set up done, successfully tested with postman.
+Will work on setting up and integrating frontend.
+
 ```
 ---
 
@@ -93,3 +96,4 @@ Spring boot + mongodb crud https://www.javaguides.net/2019/12/spring-boot-mongod
 MongoDB + springboot https://www.mongodb.com/compatibility/spring-boot  
 Running springboot in Eclipse https://medium.com/eat-sleep-code-repeat/running-your-first-spring-boot-project-in-eclipse-ide-4fbc699d44dd  
 Springboot + Mongo + CRUD https://www.bezkoder.com/react-spring-boot-mongodb/#Spring_Boot_React_MongoDB_example_Overview  
+Testing with postman https://aws.plainenglish.io/building-a-rest-api-using-mongodb-and-spring-boot-c50b18ee6efa  
