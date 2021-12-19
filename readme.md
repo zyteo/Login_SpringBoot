@@ -3,8 +3,10 @@
 Coding challenge - making a login application.
 
 Trying out Java spring boot + MongoDB + React for the login application.
+First time deploying with 2 different sites for backend and frontend.
+Heroku backend, vercel frontend.
 
-<!-- Visit the app here: https://login-mern-jwt.herokuapp.com/ -->
+Visit the app here: https://login-springboot.vercel.app/
 
 ```
 Accounts for user to test:
@@ -87,6 +89,7 @@ Struggled a bit with CORs error, managed to fix on backend side.
 Had to utilise bcrypt on react side. 
 Lots of documentation reading + googling.
 App completed.
+Will remove the other login java repo.
 
 ```
 ---
@@ -104,3 +107,4 @@ Springboot + Mongo + CRUD https://www.bezkoder.com/react-spring-boot-mongodb/#Sp
 Testing with postman https://aws.plainenglish.io/building-a-rest-api-using-mongodb-and-spring-boot-c50b18ee6efa  
 Deploying to heroku https://stackoverflow.com/questions/65395942/fatal-error-compiling-invalid-target-release-11-during-pushing-to-heroku?noredirect=1&lq=1  
 Heroku java versions https://devcenter.heroku.com/articles/java-support#supported-java-versions  
+React cookie https://www.npmjs.com/package/react-cookie  
