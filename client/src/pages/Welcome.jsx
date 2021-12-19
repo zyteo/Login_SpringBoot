@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { text } from "../localisation/text";
 
@@ -40,19 +40,14 @@ const Button = styled.button`
   }
   `;
   
-function Welcome({ language, auth }) {
+function Welcome({ language, auth, role, name, userName, cookies }) {
   const navigate = useNavigate();
-  const [userDetails, setUserDetails] = useState("");
 
   // only authenticated users can access welcome page
   useEffect(()=> {
     let token = localStorage.getItem("token");
-    if (auth !== "Auth" || (!token)){
+    if (auth !== "Auth" || (!token) || (!cookies.token)){
       navigate("/");
-    }
-    else if (token){
-      // let tokenInfo = jwt_decode(token);
-      // setUserDetails(tokenInfo);
     }
   },[])
 
@@ -65,15 +60,15 @@ function Welcome({ language, auth }) {
     <>
       <h1>{text[language].welcome}</h1>
       <h1>
-        {text[language].username} {userDetails?.username}
+        {text[language].username} {userName}
       </h1>
       <h1>
-        {text[language].name} {userDetails?.name}
+        {text[language].name} {name}
       </h1>
       <h1>
-        {text[language].role} {userDetails?.role}
+        {text[language].role} {role}
       </h1>
-      {userDetails?.role === "Manager" ? (
+      {role === "Manager" ? (
         <Button onClick={() => handleLink()}>{text[language].link}</Button>
       ) : (
         <></>

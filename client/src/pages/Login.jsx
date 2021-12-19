@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { text } from "../localisation/text";
 import styled from "styled-components";
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 const Label = styled.label`
   margin: 7px 5px;
 `;
 const Input = styled.input`
-font-family: "Spartan", sans-serif;
+  font-family: "Spartan", sans-serif;
   margin: 5px;
   padding: 2px;
   border: 1px solid black;
@@ -23,7 +23,7 @@ font-family: "Spartan", sans-serif;
     box-sizing: border-box;
     cursor: pointer;
     font-size: 14px;
-    position:relative;
+    position: relative;
   }
 `;
 const Button = styled.button`
@@ -62,11 +62,18 @@ const Button = styled.button`
   }
   `;
 
-function Login({ setAuth, setRole, setUsername, setName, language }) {
+function Login({
+  setAuth,
+  setRole,
+  setUsername,
+  setName,
+  language,
+  setCookie,
+}) {
   const [login, setLogin] = useState({});
   const navigate = useNavigate();
 
-   const handleUsernameChange = (event) => {
+  const handleUsernameChange = (event) => {
     const value = event.target.value;
     setLogin({ ...login, username: value });
   };
@@ -79,12 +86,21 @@ function Login({ setAuth, setRole, setUsername, setName, language }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .get(`https://login-java-springboot.herokuapp.com/api/user/${login.username}`)
+      .get(
+        `https://login-java-springboot.herokuapp.com/api/user/${login.username}`
+      )
       .then((res) => {
         // only login if username exists, AND that password is right
-        if (res.status === 200 && bcrypt.compareSync(login.password, res.data.password)) {
-
-          console.log(res);
+        if (
+          res.status === 200 &&
+          bcrypt.compareSync(login.password, res.data.password)
+        ) {
+          setCookie("token", login.username, {
+            path: "/",
+            maxAge: 86400,
+            secure: true,
+          });
+          localStorage.setItem("token", "login");
           setAuth("Auth");
           setUsername(res.data.username);
           setName(res.data.name);
@@ -106,23 +122,25 @@ function Login({ setAuth, setRole, setUsername, setName, language }) {
     <>
       <h1>{text[language].login}</h1>
       <form onSubmit={handleSubmit}>
-            <Label>{text[language].username}</Label>
-            <Input
-              type="text"
-              name="username"
-              value={login.username}
-              onChange={handleUsernameChange}
-              required
-              ></Input><br/>
-              <Label>{text[language].password}</Label>
-            <Input
-              type="password"
-              name="password"
-              value={login.password}
-              onChange={handlePasswordChange}
-              required
-            ></Input><br/>
-              
+        <Label>{text[language].username}</Label>
+        <Input
+          type="text"
+          name="username"
+          value={login.username}
+          onChange={handleUsernameChange}
+          required
+        ></Input>
+        <br />
+        <Label>{text[language].password}</Label>
+        <Input
+          type="password"
+          name="password"
+          value={login.password}
+          onChange={handlePasswordChange}
+          required
+        ></Input>
+        <br />
+
         <Button>{text[language].login}</Button>
       </form>
     </>

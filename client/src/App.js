@@ -1,11 +1,11 @@
 import "./App.css";
-import axios from "axios";
 import React, { useState } from "react";
 import SignUp from "./pages/Signup";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Welcome from "./pages/Welcome";
 import NavBar from "./pages/NavBar";
+import { useCookies } from "react-cookie";
 
 function App() {
   const [auth, setAuth] = useState("NoAuth");
@@ -13,15 +13,16 @@ function App() {
   const [userName, setUsername] = useState("");
   const [name, setName] = useState("");
   const [language, setLanguage] = useState("English");
+  const [cookies, setCookie] = useCookies(["token"]);
 
   const navigate = useNavigate();
   // handle function for logging out, passed as props to navbar
   const handleLogOut = async () => {
-    // await axios.get(`/api/logout`);
     setAuth("NoAuth");
     setRole("User");
     setUsername("");
-    // localStorage.removeItem("token");
+    localStorage.removeItem("token");
+    setCookie('token', "logout",{ path: '/', maxAge: 1, secure: true });
     navigate(`/`);
   };
 
@@ -45,6 +46,7 @@ function App() {
               setRole={setRole}
               setUsername={setUsername}
               language={language}
+              setCookie={setCookie}
             />
           }
         />
@@ -52,7 +54,16 @@ function App() {
         <Route path="/signup" element={<SignUp language={language} />} />
         <Route
           path="/welcome"
-          element={<Welcome language={language} auth={auth} />}
+          element={
+            <Welcome
+              language={language}
+              auth={auth}
+              role={role}
+              name={name}
+              userName={userName}
+              cookies={cookies}
+            />
+          }
         />
       </Routes>
     </div>
