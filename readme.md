@@ -82,6 +82,7 @@ Then I utilise reactJS frontend for hashing PW + JWT. Quite confident I can do i
 
 - 19 Dec: Got the springboot backend set up done, successfully tested with postman.
 Will work on setting up and integrating frontend.
+Managed to deploy backend on heroku! Yes!
 
 ```
 ---
@@ -97,3 +98,5 @@ MongoDB + springboot https://www.mongodb.com/compatibility/spring-boot
 Running springboot in Eclipse https://medium.com/eat-sleep-code-repeat/running-your-first-spring-boot-project-in-eclipse-ide-4fbc699d44dd  
 Springboot + Mongo + CRUD https://www.bezkoder.com/react-spring-boot-mongodb/#Spring_Boot_React_MongoDB_example_Overview  
 Testing with postman https://aws.plainenglish.io/building-a-rest-api-using-mongodb-and-spring-boot-c50b18ee6efa  
+Deploying to heroku https://stackoverflow.com/questions/65395942/fatal-error-compiling-invalid-target-release-11-during-pushing-to-heroku?noredirect=1&lq=1  
+Heroku java versions https://devcenter.heroku.com/articles/java-support#supported-java-versions  
