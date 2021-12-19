@@ -69,7 +69,7 @@ function SignUp({ language }) {
 
   const addUser = async (user) => {
     await axios
-      .post(`/api/signup`, user)
+      .post(`https://login-java-springboot.herokuapp.com/api/signup`, user)
       .then((res) => {
         alert(text[language].signupSuccess);
         navigate("/");

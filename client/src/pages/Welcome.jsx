@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { text } from "../localisation/text";
-import jwt_decode from "jwt-decode";
+
 import styled from "styled-components";
 
 const Button = styled.button`
@@ -51,8 +51,8 @@ function Welcome({ language, auth }) {
       navigate("/");
     }
     else if (token){
-      let tokenInfo = jwt_decode(token);
-      setUserDetails(tokenInfo);
+      // let tokenInfo = jwt_decode(token);
+      // setUserDetails(tokenInfo);
     }
   },[])
 

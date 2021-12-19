@@ -9,7 +9,7 @@ const Navbar = styled.nav`
   justify-content: center;
   width: 100%;
   height: 7vh;
-  background-color: #faf0e6;
+  background-color: #DAF89E;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
 `;
 
