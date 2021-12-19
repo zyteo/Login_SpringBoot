@@ -1,6 +1,6 @@
 import "./App.css";
 import axios from "axios";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import SignUp from "./pages/Signup";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./pages/Login";
@@ -17,11 +17,11 @@ function App() {
   const navigate = useNavigate();
   // handle function for logging out, passed as props to navbar
   const handleLogOut = async () => {
-    await axios.get(`/api/logout`);
+    // await axios.get(`/api/logout`);
     setAuth("NoAuth");
     setRole("User");
     setUsername("");
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
     navigate(`/`);
   };
 
@@ -52,14 +52,8 @@ function App() {
         <Route path="/signup" element={<SignUp language={language} />} />
         <Route
           path="/welcome"
-          element={
-            <Welcome
-              language={language}
-              auth={auth}
-            />
-          }
+          element={<Welcome language={language} auth={auth} />}
         />
-
       </Routes>
     </div>
   );

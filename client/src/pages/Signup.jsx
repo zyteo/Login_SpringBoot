@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { text } from "../localisation/text";
 import styled from "styled-components";
+const bcrypt = require('bcryptjs');
 
 const Label = styled.label`
   margin: 7px 5px;
@@ -69,10 +70,11 @@ function SignUp({ language }) {
 
   const addUser = async (user) => {
     await axios
-      .post(`https://login-java-springboot.herokuapp.com/api/signup`, user)
+      .post(`https://localhost:8080/api/signup`, {username: user.username, name:user.name, password:user.password})
       .then((res) => {
         alert(text[language].signupSuccess);
         navigate("/");
+        console.log(res);
       })
       .catch((err) => {
         if (err.response.data.message === "username exists") {
