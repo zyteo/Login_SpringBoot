@@ -78,9 +78,9 @@ function SignUp({ language }) {
         navigate("/");
       })
       .catch((err) => {
-        if (err.response.data.message === "username exists") {
+        if (err.response.status === 403) {
           alert(text[language].signupUserTaken);
-        } else if (err.response.data.message === "name exists") {
+        } else if (err.response.status === 409) {
           alert(text[language].signupNameTaken);
         } else {
           alert(text[language].signupError);

@@ -71,6 +71,7 @@ function Login({
   setCookie,
 }) {
   const [login, setLogin] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
@@ -84,6 +85,7 @@ function Login({
   };
 
   const handleSubmit = async (event) => {
+    setLoading(true);
     event.preventDefault();
     await axios
       .get(
@@ -108,20 +110,23 @@ function Login({
             setRole("Manager");
           }
           navigate(`/welcome`);
+          setLoading(false);
         } else {
           alert(text[language].loginFail);
+          setLoading(false);
         }
       })
       .catch((err) => {
         console.log("err", err);
         alert(text[language].loginFail);
+        setLoading(false);
       });
   };
 
   return (
     <>
       <h1>{text[language].login}</h1>
-      <form onSubmit={handleSubmit}>
+      {loading === false ? (<form onSubmit={handleSubmit}>
         <Label>{text[language].username}</Label>
         <Input
           type="text"
@@ -142,7 +147,8 @@ function Login({
         <br />
 
         <Button>{text[language].login}</Button>
-      </form>
+      </form>) : <h3>Logging in...</h3>}
+      
     </>
   );
 }
