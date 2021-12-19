@@ -22,11 +22,12 @@ password: specialusername
 Technologies used to build this project.
 
 ```
-- Java
-- Spring boot + maven
+- Java Spring boot + maven
 - MongoDB
 - ReactJS
-
+- styled-components
+- react-cookie
+- bcryptjs
 ```
 
 ### User Stories
@@ -53,8 +54,7 @@ Models:
 
 RESTful APIs
 - Post (create user)
-- Post (login)
-- Get (logout)
+- Get (login)
 
 Pages needed:
 - Main login
@@ -83,6 +83,10 @@ Then I utilise reactJS frontend for hashing PW + JWT. Quite confident I can do i
 - 19 Dec: Got the springboot backend set up done, successfully tested with postman.
 Will work on setting up and integrating frontend.
 Managed to deploy backend on heroku! Yes!
+Struggled a bit with CORs error, managed to fix on backend side.
+Had to utilise bcrypt on react side. 
+Lots of documentation reading + googling.
+App completed.
 
 ```
 ---
