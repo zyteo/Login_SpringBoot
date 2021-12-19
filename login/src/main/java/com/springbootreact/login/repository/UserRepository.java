@@ -5,7 +5,7 @@ package com.springbootreact.login.repository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;
 
-import com.login.springbootlogin.model.User;
+import com.springbootreact.login.model.User;
 
 //The API implementation happens in the repository. It acts as a link between the model and the database, and has all the methods for CRUD operations.
 
