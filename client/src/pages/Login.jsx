@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { text } from "../localisation/text";
 import styled from "styled-components";
+const bcrypt = require('bcryptjs');
 
 const Label = styled.label`
   margin: 7px 5px;
@@ -78,17 +79,21 @@ function Login({ setAuth, setRole, setUsername, setName, language }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .get(`/api/user/${login.username}`)
+      .get(`https://login-java-springboot.herokuapp.com/api/user/${login.username}`)
       .then((res) => {
-        if (res.data.success === true) {
+        // only login if username exists, AND that password is right
+        if (res.status === 200 && bcrypt.compareSync(login.password, res.data.password)) {
+
+          console.log(res);
           setAuth("Auth");
           setUsername(res.data.username);
           setName(res.data.name);
-          localStorage.setItem('token', res.data.token);
           if (res.data.role === "Manager") {
             setRole("Manager");
           }
           navigate(`/welcome`);
+        } else {
+          alert(text[language].loginFail);
         }
       })
       .catch((err) => {

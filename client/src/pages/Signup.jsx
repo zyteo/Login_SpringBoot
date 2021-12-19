@@ -69,12 +69,13 @@ function SignUp({ language }) {
   const navigate = useNavigate();
 
   const addUser = async (user) => {
+    // use bcrypt to hash password before saving in database
+    let hashedPassword = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
     await axios
-      .post(`https://localhost:8080/api/signup`, {username: user.username, name:user.name, password:user.password})
+      .post(`https://login-java-springboot.herokuapp.com/api/signup`, {username: user.username, name:user.name, password:hashedPassword})
       .then((res) => {
         alert(text[language].signupSuccess);
         navigate("/");
-        console.log(res);
       })
       .catch((err) => {
         if (err.response.data.message === "username exists") {
