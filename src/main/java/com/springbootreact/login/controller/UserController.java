@@ -27,7 +27,7 @@ public class UserController {
 
 //  get request for logging in - get user details for frontend to use
   @GetMapping("/user/{username}")
-  public ResponseEntity<User> getTutorialById(@PathVariable("username") String username) {
+  public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username) {
 		    try {
 		    	Optional<User> userData = userRepository.findByUsername(username);
 
